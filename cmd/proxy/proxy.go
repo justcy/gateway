@@ -27,14 +27,50 @@ func (f *filterFlag) Set(value string) error {
 	return nil
 }
 
+//var (
+//	defaultFilters = &filterFlag{}
+//	filters        = &filterFlag{}
+//
+//	addr                          = flag.String("addr", "127.0.0.1:80", "Addr: http request entrypoint")
+//	addrRPC                       = flag.String("addr-rpc", "127.0.0.1:9091", "Addr: manager request entrypoint")
+//	addrStore                     = flag.String("addr-store", "etcd://127.0.0.1:2379", "Addr: store of meta data, support etcd")
+//	addrPPROF                     = flag.String("addr-pprof", "", "Addr: pprof addr")
+//	namespace                     = flag.String("namespace", "dev", "The namespace to isolation the environment.")
+//	limitCpus                     = flag.Int("limit-cpus", 0, "Limit: schedule threads count")
+//	limitCountDispatchWorker      = flag.Int("limit-dispatch", 64, "Limit: Count of dispatch worker")
+//	limitCountCopyWorker          = flag.Int("limit-copy", 4, "Limit: Count of copy worker")
+//	limitCountHeathCheckWorker    = flag.Int("limit-heathcheck", 1, "Limit: Count of heath check worker")
+//	limitIntervalHeathCheckSec    = flag.Int("limit-heathcheck-interval", 60, "Limit(sec): Interval for heath check")
+//	limitCountConn                = flag.Int("limit-conn", 64, "Limit(count): Count of connection per backend server")
+//	limitDurationConnKeepaliveSec = flag.Int("limit-conn-keepalive", 60, "Limit(sec): Keepalive for backend server connections")
+//	limitDurationConnIdleSec      = flag.Int("limit-conn-idle", 30, "Limit(sec): Idle for backend server connections")
+//	limitTimeoutWriteSec          = flag.Int("limit-timeout-write", 30, "Limit(sec): Timeout for write to backend servers")
+//	limitTimeoutReadSec           = flag.Int("limit-timeout-read", 30, "Limit(sec): Timeout for read from backend servers")
+//	limitBufferRead               = flag.Int("limit-buf-read", 2048, "Limit(bytes): Bytes for read buffer size")
+//	limitBufferWrite              = flag.Int("limit-buf-write", 1024, "Limit(bytes): Bytes for write buffer size")
+//	limitBytesBodyMB              = flag.Int("limit-body", 10, "Limit(MB): MB for body size")
+//	limitBytesCachingMB           = flag.Uint64("limit-caching", 64, "Limit(MB): MB for caching size")
+//	ttlProxy                      = flag.Int64("ttl-proxy", 10, "TTL(secs): proxy")
+//	version                       = flag.Bool("version", false, "Show version info")
+//
+//	// internal plugin configuration file
+//	jwtCfg = flag.String("jwt", "", "PLugin(JWT): jwt plugin configuration file, json format")
+//
+//	// metric
+//	metricJob          = flag.String("metric-job", "", "prometheus job name")
+//	metricInstance     = flag.String("metric-instance", "", "prometheus instance name")
+//	metricAddress      = flag.String("metric-address", "", "prometheus proxy address")
+//	metricIntervalSync = flag.Uint64("interval-metric-sync", 0, "Interval(sec): metric sync")
+//)
+
 var (
 	defaultFilters = &filterFlag{}
 	filters        = &filterFlag{}
 
-	addr                          = flag.String("addr", "127.0.0.1:80", "Addr: http request entrypoint")
-	addrRPC                       = flag.String("addr-rpc", "127.0.0.1:9091", "Addr: manager request entrypoint")
-	addrStore                     = flag.String("addr-store", "etcd://127.0.0.1:2379", "Addr: store of meta data, support etcd")
-	addrPPROF                     = flag.String("addr-pprof", "", "Addr: pprof addr")
+	addr                          = flag.String("addr",os.Getenv("ADDR_ENV"), "Addr: http request entrypoint")
+	addrRPC                       = flag.String("addr-rpc", os.Getenv("ADDR_RPC_ENV"), "Addr: manager request entrypoint")
+	addrStore                     = flag.String("addr-store", os.Getenv("ADDR_STORE_ENV"), "Addr: store of meta data, support etcd")
+	addrPPROF                     = flag.String("addr-pprof", os.Getenv("ADDRPPROF_ENV"), "Addr: pprof addr")
 	namespace                     = flag.String("namespace", "dev", "The namespace to isolation the environment.")
 	limitCpus                     = flag.Int("limit-cpus", 0, "Limit: schedule threads count")
 	limitCountDispatchWorker      = flag.Int("limit-dispatch", 64, "Limit: Count of dispatch worker")

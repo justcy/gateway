@@ -27,9 +27,9 @@ release_darwin: darwin dist_dir apiserver proxy;
 .PHONY: docker
 docker: release download_etcd;
 	@echo ========== current docker tag is: $(DOCKER_TAG) ==========
-	docker build -t fagongzi/gateway:$(DOCKER_TAG) -f Dockerfile .
-	docker build -t fagongzi/proxy:$(DOCKER_TAG) -f Dockerfile-proxy .
-	docker build -t fagongzi/apiserver:$(DOCKER_TAG) -f Dockerfile-apiserver .
+	docker build -t justcy/gateway:$(DOCKER_TAG) -f Dockerfile . && docker pull justcy/gateway:$(DOCKER_TAG)
+	docker build -t justcy/proxy:$(DOCKER_TAG) -f Dockerfile-proxy . && docker pull justcy/proxy:$(DOCKER_TAG)
+	docker build -t justcy/apiserver:$(DOCKER_TAG) -f Dockerfile-apiserver . && docker pull justcy/apiserver:$(DOCKER_TAG)
 
 .PHONY: darwin
 darwin:

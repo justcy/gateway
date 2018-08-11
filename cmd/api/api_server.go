@@ -17,18 +17,34 @@ import (
 	"github.com/fagongzi/grpcx"
 	"github.com/fagongzi/log"
 	"google.golang.org/grpc"
+	"strconv"
 )
 
+//var (
+//	addr           = flag.String("addr", "127.0.0.1:9092", "Addr: client grpc entrypoint")
+//	addrHTTP       = flag.String("addr-http", "127.0.0.1:9093", "Addr: client http restful entrypoint")
+//	addrStore      = flag.String("addr-store", "etcd://127.0.0.1:2379", "Addr: store address")
+//	namespace      = flag.String("namespace", "dev", "The namespace to isolation the environment.")
+//	discovery      = flag.Bool("discovery", false, "Publish apiserver service via discovery.")
+//	servicePrefix  = flag.String("service-prefix", "/services", "The prefix for service name.")
+//	publishLease   = flag.Int64("publish-lease", 10, "Publish service lease seconds")
+//	publishTimeout = flag.Int("publish-timeout", 30, "Publish service timeout seconds")
+//	version        = flag.Bool("version", false, "Show version info")
+//)
 var (
-	addr           = flag.String("addr", "127.0.0.1:9092", "Addr: client grpc entrypoint")
-	addrHTTP       = flag.String("addr-http", "127.0.0.1:9093", "Addr: client http restful entrypoint")
-	addrStore      = flag.String("addr-store", "etcd://127.0.0.1:2379", "Addr: store address")
-	namespace      = flag.String("namespace", "dev", "The namespace to isolation the environment.")
-	discovery      = flag.Bool("discovery", false, "Publish apiserver service via discovery.")
-	servicePrefix  = flag.String("service-prefix", "/services", "The prefix for service name.")
-	publishLease   = flag.Int64("publish-lease", 10, "Publish service lease seconds")
-	publishTimeout = flag.Int("publish-timeout", 30, "Publish service timeout seconds")
-	version        = flag.Bool("version", false, "Show version info")
+	addr           = flag.String("addr", os.Getenv("ADDR_ENV"), "Addr: client grpc entrypoint")
+	addrHTTP       = flag.String("addr-http", os.Getenv("ADDR_HTTP_ENV"), "Addr: client http restful entrypoint")
+	addrStore      = flag.String("addr-store", os.Getenv("ADDR_STORE_ENV"), "Addr: store address")
+	namespace      = flag.String("namespace", os.Getenv("NAMESPACE_ENV"), "The namespace to isolation the environment.")
+	discovery_env,_ = strconv.ParseBool(os.Getenv("DISCOVERY_ENV"))
+	discovery      = flag.Bool("discovery", discovery_env, "Publish apiserver service via discovery.")
+	servicePrefix  = flag.String("service-prefix", os.Getenv("SERVICE_PREFIX_ENV"), "The prefix for service name.")
+	publishLease_env,_ = strconv.ParseInt(os.Getenv("PUBLISH_LEASE_ENV"),10,64)
+	publishLease   = flag.Int64("publish-lease", publishLease_env, "Publish service lease seconds")
+	publisTimeout_env,_ = strconv.Atoi(os.Getenv("PUBLISH_TIMEOUT_ENV"))
+	publishTimeout = flag.Int("publish-timeout", publisTimeout_env, "Publish service timeout seconds")
+	version_env,_ = strconv.ParseBool(os.Getenv("VERSION_ENV"))
+	version        = flag.Bool("version", version_env, "Show version info")
 )
 
 func main() {
