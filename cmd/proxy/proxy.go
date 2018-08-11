@@ -67,10 +67,10 @@ var (
 	defaultFilters = &filterFlag{}
 	filters        = &filterFlag{}
 
-	addr                          = flag.String("addr",os.Getenv("ADDR_ENV"), "Addr: http request entrypoint")
-	addrRPC                       = flag.String("addr-rpc", os.Getenv("ADDR_RPC_ENV"), "Addr: manager request entrypoint")
-	addrStore                     = flag.String("addr-store", os.Getenv("ADDR_STORE_ENV"), "Addr: store of meta data, support etcd")
-	addrPPROF                     = flag.String("addr-pprof", os.Getenv("ADDRPPROF_ENV"), "Addr: pprof addr")
+	addr                          = flag.String("addr",os.Getenv("PROXY_ADDR_ENV"), "Addr: http request entrypoint")
+	addrRPC                       = flag.String("addr-rpc", os.Getenv("PROXY_ADDR_RPC_ENV"), "Addr: manager request entrypoint")
+	addrStore                     = flag.String("addr-store", os.Getenv("PROXY_ADDR_STORE_ENV"), "Addr: store of meta data, support etcd")
+	addrPPROF                     = flag.String("addr-pprof", os.Getenv("PROXY_ADDRPPROF_ENV"), "Addr: pprof addr")
 	namespace                     = flag.String("namespace", "dev", "The namespace to isolation the environment.")
 	limitCpus                     = flag.Int("limit-cpus", 0, "Limit: schedule threads count")
 	limitCountDispatchWorker      = flag.Int("limit-dispatch", 64, "Limit: Count of dispatch worker")
